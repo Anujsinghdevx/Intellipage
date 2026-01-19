@@ -2,24 +2,34 @@ import { initializeApp, getApps, App, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 let app: App;
-let serviceAccount: any;
 
-try {
-    serviceAccount = require('./service_key.json');
-    console.log("✅ Service key loaded successfully");
-} catch (error) {
-    console.error("❌ Failed to load service_key.json");
-    console.error("Make sure service_key.json is in your project root");
-    throw new Error("service_key.json not found - download it from Firebase Console → Project Settings → Service Accounts");
+const requiredEnvVars = {
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY,
+};
+
+console.log("🔍 Checking Firebase Admin environment variables:");
+console.log("Project ID:", requiredEnvVars.projectId ? "✅ Found" : "❌ Missing");
+console.log("Client Email:", requiredEnvVars.clientEmail ? "✅ Found" : "❌ Missing");
+console.log("Private Key:", requiredEnvVars.privateKey ? "✅ Found" : "❌ Missing");
+
+if (!requiredEnvVars.projectId || !requiredEnvVars.clientEmail || !requiredEnvVars.privateKey) {
+    console.error("❌ Missing Firebase Admin credentials in environment variables");
+    throw new Error("Missing Firebase Admin environment variables. Please check your .env.local file.");
 }
 
 if (getApps().length === 0) {
     try {
         app = initializeApp({
-            credential: cert(serviceAccount)
+            credential: cert({
+                projectId: requiredEnvVars.projectId,
+                clientEmail: requiredEnvVars.clientEmail,
+                privateKey: requiredEnvVars.privateKey.replace(/\\n/g, '\n'),
+            })
         });
         console.log("✅ Firebase Admin initialized successfully");
-        console.log("📦 Project ID:", serviceAccount.project_id);
+        console.log("📦 Project ID:", requiredEnvVars.projectId);
     } catch (error) {
         console.error("❌ Firebase Admin initialization failed:", error);
         throw error;
