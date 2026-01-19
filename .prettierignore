@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all node_modules:
+node_modules
+
+# Ignore specific files:
+service_key.json
+firebase-admin.ts
+firebase.ts
+
+#Ignore next files
+.next

@@ -1,7 +1,7 @@
-'use client'
-import { useMyPresence, useOthers } from '@liveblocks/react'
-import React from 'react'
-import FollowPointer from './FollowPointer'
+"use client";
+import { useMyPresence, useOthers } from "@liveblocks/react";
+import React from "react";
+import FollowPointer from "./FollowPointer";
 
 const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,7 +20,11 @@ const LiveCursorProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <div onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
       {others
-        .filter((other) => other.presence?.cursor !== undefined && other.presence?.cursor !== null)
+        .filter(
+          (other) =>
+            other.presence?.cursor !== undefined &&
+            other.presence?.cursor !== null
+        )
         .map(({ connectionId, presence, info }) => (
           <FollowPointer
             key={connectionId}

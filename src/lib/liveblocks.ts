@@ -1,13 +1,13 @@
-import { Liveblocks } from '@liveblocks/node';
+import { Liveblocks } from "@liveblocks/node";
 
 const key = process.env.LIVEBLOCKS_SECRET_KEY;
 
 if (!key) {
-  throw new Error('Missing LIVEBLOCKS_PRIVATE_KEY environment variable');
+  throw new Error("Missing LIVEBLOCKS_PRIVATE_KEY environment variable");
 }
 
 const liveblocks = new Liveblocks({
-    secret :key
+  secret: key,
 });
 
 export default liveblocks;

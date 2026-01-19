@@ -40,9 +40,11 @@ Check out the live version of IntelliPage:
    npm install
    ```
 4. Set up environment variables in a `.env` file:
+
    ```env
-  
+
    ```
+
 5. Start the development server:
    ```sh
    npm run dev
@@ -51,6 +53,3 @@ Check out the live version of IntelliPage:
 ## Contributing
 
 Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
-
-

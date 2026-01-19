@@ -1,38 +1,41 @@
-import { useUser } from '@clerk/nextjs'
-import { useRoom } from '@liveblocks/react';
-import { collectionGroup, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react'
-import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../../firebase';
+// src/lib/useOwner.ts
+import { useUser } from "@clerk/nextjs";
+import { useRoom } from "@liveblocks/react";
+import { doc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { db } from "../../firebase";
 
 const useOwner = () => {
-    const { user } = useUser();
-    const room = useRoom();
-    const [isOwner, setIsOwner] = useState(false);
-    const [usersInRoom] = useCollection(
-        user && query(collectionGroup(db, "rooms"), where("roomId", "==", room.id))
-    )
-    useEffect(() => {
-        if (usersInRoom?.docs && usersInRoom.docs.length > 0) {
-             {const owners = usersInRoom.docs.filter(
-                    (doc) => doc.data().role === 'owner'
-                );
+  const { user } = useUser();
+  const room = useRoom();
+  const [isOwner, setIsOwner] = useState(false);
 
-                if (
-                    owners.some(
-                        (owner) => owner.data().userId === user?.emailAddresses[0].toString()
-                    )
-                ) {
-                    setIsOwner(true)
-                }
+  const email = user?.emailAddresses?.[0]?.emailAddress;
 
-            }
-        }
-    }, [usersInRoom, user]);
+  // Query the specific user's room document
+  const [roomData, loading] = useDocumentData(
+    email && room?.id ? doc(db, "users", email, "rooms", room.id) : null
+  );
 
-    return isOwner;
+  useEffect(() => {
+    if (loading) return;
 
-}
+    if (roomData) {
+      setIsOwner(roomData.role === "owner");
+      console.log(
+        "🔍 useOwner - User role:",
+        roomData.role,
+        "isOwner:",
+        roomData.role === "owner"
+      );
+    } else {
+      setIsOwner(false);
+      console.log("🔍 useOwner - No room data found, user is not owner");
+    }
+  }, [roomData, loading]);
 
-export default useOwner
+  return isOwner;
+};
 
+export default useOwner;

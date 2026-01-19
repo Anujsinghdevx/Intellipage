@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {}
+@layer base {
+}
 
 @layer base {
   * {
@@ -17,12 +18,15 @@
 /* Blocknote editor  */
 
 .bn-editor {
-  background-color: linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.10) 100%);
+  background-color: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
   box-shadow: 0px 4px 24px -1px rgba(212, 175, 156, 0.25);
   border-radius: 40px;
-  border: 3px solid #FFF1EA;
+  border: 3px solid #fff1ea;
   backdrop-filter: blur(45px);
-
 }
 
 .bn-toolbar {
@@ -40,51 +44,66 @@
 
 /* Backgrounds */
 
-.folding-page{
-    --s: 84px; 
-    --c1: #ffffff;
-    --c2: #71e9a0;
-    --c3: #2a6a9b;
-    
-    --a:from -30deg at;
-    background:
-      linear-gradient(#0000 50%,#0004 0),
-      conic-gradient(var(--a) 90%,var(--c1) 240deg,#0000     0),
-      conic-gradient(var(--a) 75%,var(--c2) 240deg,#0000     0),
-      conic-gradient(var(--a) 25%,#0000     240deg,var(--c1) 0),
-      conic-gradient(var(--a) 40%,var(--c1) 240deg,var(--c3) 0);
-    background-size: calc(1.5*var(--s)) var(--s);
+.folding-page {
+  --s: 84px;
+  --c1: #ffffff;
+  --c2: #71e9a0;
+  --c3: #2a6a9b;
+
+  --a: from -30deg at;
+  background: linear-gradient(#0000 50%, #0004 0),
+    conic-gradient(var(--a) 90%, var(--c1) 240deg, #0000 0),
+    conic-gradient(var(--a) 75%, var(--c2) 240deg, #0000 0),
+    conic-gradient(var(--a) 25%, #0000 240deg, var(--c1) 0),
+    conic-gradient(var(--a) 40%, var(--c1) 240deg, var(--c3) 0);
+  background-size: calc(1.5 * var(--s)) var(--s);
 }
 
-.crossdots{
-  background:
-    radial-gradient(black 3px, transparent 4px),
+.crossdots {
+  background: radial-gradient(black 3px, transparent 4px),
     radial-gradient(black 3px, transparent 4px),
     linear-gradient(#fff 4px, transparent 0),
-    linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
-    linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
+    linear-gradient(
+      45deg,
+      transparent 74px,
+      transparent 75px,
+      #a4a4a4 75px,
+      #a4a4a4 76px,
+      transparent 77px,
+      transparent 109px
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75px,
+      transparent 76px,
+      #a4a4a4 76px,
+      #a4a4a4 77px,
+      transparent 78px,
+      transparent 109px
+    ),
     #fff;
-    background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
-    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
 
 .diagonal-stripes {
-  background: repeating-linear-gradient(45deg,
-      #4caf50,
-      #4caf50 10px,
-      #8bc34a 10px,
-      #8bc34a 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    #4caf50,
+    #4caf50 10px,
+    #8bc34a 10px,
+    #8bc34a 20px
+  );
 }
 
 .polka-dots {
-  background: radial-gradient(circle, #ff4081 10%, transparent 10%) 0 0 / 20px 20px;
+  background: radial-gradient(circle, #ff4081 10%, transparent 10%) 0 0 / 20px
+    20px;
 }
 
-
-
 .checkers {
-  --b: 4px; 
-  --s: 60px; 
+  --b: 4px;
+  --s: 60px;
   --c: #0000 75%, #999 0;
   --p1: from -90deg at calc(50% + var(--b)) calc(100% - var(--b));
   --p2: from -90deg at var(--b) calc(50% - var(--b));
@@ -92,39 +111,70 @@
   --e-: calc(var(--s) / -2);
   width: 100%;
   height: 100vh;
-  background:
-    conic-gradient(var(--p1), var(--c)),
-    conic-gradient(var(--p1), var(--c)),
-    conic-gradient(var(--p2), var(--c)),
-    conic-gradient(var(--p2), var(--c)),
-    #111;
+  background: conic-gradient(var(--p1), var(--c)),
+    conic-gradient(var(--p1), var(--c)), conic-gradient(var(--p2), var(--c)),
+    conic-gradient(var(--p2), var(--c)), #111;
   background-size: var(--s) var(--s);
   animation: g8 10s infinite linear;
 }
 
 @keyframes g8 {
-  0%, 2% { background-position: 0 0, var(--e) var(--e), 0 0, var(--e) var(--e); }
-  10%, 15% { background-position: 0 0, var(--e) var(--e), 0 var(--e), var(--e) 0; }
-  22.5%, 27.5% { background-position: var(--e) 0, 0 var(--e), 0 var(--e), var(--e) 0; }
-  35%, 40% { background-position: var(--e) 0, 0 var(--e), 0 0, var(--e) var(--e-); }
-  47.5%, 52.5% { background-position: 0 0, var(--e-) var(--e), 0 0, var(--e) var(--e-); }
-  60%, 65% { background-position: 0 0, var(--e-) var(--e), 0 var(--e-), var(--e) 0; }
-  72.5%, 77.5% { background-position: var(--e-) 0, 0 var(--e), 0 var(--e-), var(--e) 0; }
-  85%, 90% { background-position: var(--e-) 0, 0 var(--e), 0 0, var(--e) var(--e); }
-  98%, 100% { background-position: 0 0, var(--e) var(--e), 0 0, var(--e) var(--e); }
+  0%,
+  2% {
+    background-position: 0 0, var(--e) var(--e), 0 0, var(--e) var(--e);
+  }
+  10%,
+  15% {
+    background-position: 0 0, var(--e) var(--e), 0 var(--e), var(--e) 0;
+  }
+  22.5%,
+  27.5% {
+    background-position: var(--e) 0, 0 var(--e), 0 var(--e), var(--e) 0;
+  }
+  35%,
+  40% {
+    background-position: var(--e) 0, 0 var(--e), 0 0, var(--e) var(--e-);
+  }
+  47.5%,
+  52.5% {
+    background-position: 0 0, var(--e-) var(--e), 0 0, var(--e) var(--e-);
+  }
+  60%,
+  65% {
+    background-position: 0 0, var(--e-) var(--e), 0 var(--e-), var(--e) 0;
+  }
+  72.5%,
+  77.5% {
+    background-position: var(--e-) 0, 0 var(--e), 0 var(--e-), var(--e) 0;
+  }
+  85%,
+  90% {
+    background-position: var(--e-) 0, 0 var(--e), 0 0, var(--e) var(--e);
+  }
+  98%,
+  100% {
+    background-position: 0 0, var(--e) var(--e), 0 0, var(--e) var(--e);
+  }
 }
 
 .wavy-lines {
   background-color: #e5e5f7;
   opacity: 0.8;
-  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #e5e5f7 10px), repeating-linear-gradient(#de45f755, #de45f7);
-
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #e5e5f7 10px
+    ),
+    repeating-linear-gradient(#de45f755, #de45f7);
 }
 
 .graph {
   background-color: #e5e5f7;
   opacity: 0.8;
-  background-image: linear-gradient(#9a9796 2px, transparent 2px), linear-gradient(90deg, #9a9796 2px, transparent 2px), linear-gradient(#9a9796 1px, transparent 1px), linear-gradient(90deg, #9a9796 1px, #e5e5f7 1px);
+  background-image: linear-gradient(#9a9796 2px, transparent 2px),
+    linear-gradient(90deg, #9a9796 2px, transparent 2px),
+    linear-gradient(#9a9796 1px, transparent 1px),
+    linear-gradient(90deg, #9a9796 1px, #e5e5f7 1px);
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
@@ -133,203 +183,236 @@
   background-color: #e5e5f7;
   opacity: 0.8;
   background-size: 20px 20px;
-  background-image: repeating-linear-gradient(0deg, #9a9796, #9a9796 1px, #e5e5f7 1px, #e5e5f7);
+  background-image: repeating-linear-gradient(
+    0deg,
+    #9a9796,
+    #9a9796 1px,
+    #e5e5f7 1px,
+    #e5e5f7
+  );
 }
 
 .heart {
-  --s: 120px; 
+  --s: 120px;
   --c1: #e7525b;
   --c2: #ffffff;
-  
+
   --_g: 80%, var(--c1) 25.4%, #0000 26%;
-  
-  background:
-    radial-gradient(at 80% var(--_g)),
+
+  background: radial-gradient(at 80% var(--_g)),
     radial-gradient(at 20% var(--_g)),
     conic-gradient(from -45deg at 50% 41%, var(--c1) 90deg, var(--c2) 0)
       calc(var(--s) / 2) 0;
-  
+
   background-size: var(--s) var(--s);
 }
 
-.eye{
+.eye {
   --s: 80px;
-  --_g: radial-gradient(#F4EAD5 31%,#0000 32%);
-  --_l: radial-gradient(#594F4F 15%,#0000 16%);
-  background: var(--_l),var(--_l),var(--_g),var(--_g),#45ADA8;
-  background-position: 0 0,var(--s) var(--s);
-  background-size: calc(2*var(--s)) calc(2*var(--s));
-  animation: 
-    g3-1 2s cubic-bezier(0.5,92,0.5,-92) infinite, 
-    g3-2 2s cubic-bezier(0.5,92,0.5,-92) infinite -.5s;
+  --_g: radial-gradient(#f4ead5 31%, #0000 32%);
+  --_l: radial-gradient(#594f4f 15%, #0000 16%);
+  background: var(--_l), var(--_l), var(--_g), var(--_g), #45ada8;
+  background-position: 0 0, var(--s) var(--s);
+  background-size: calc(2 * var(--s)) calc(2 * var(--s));
+  animation: g3-1 2s cubic-bezier(0.5, 92, 0.5, -92) infinite,
+    g3-2 2s cubic-bezier(0.5, 92, 0.5, -92) infinite -0.5s;
 }
 
-
-@keyframes g3-1{
-  to {background-position-x: -.25px, calc(var(--s) - 1px),-.5px,calc(var(--s) - .5px)}
-}
-@keyframes g3-2{
-  to {background-position-y: -.25px, calc(var(--s) - 1px),.25px,calc(var(--s) - .5px)}
-}
-
-
-.illusion{
-    --s: 80px;
-    --c:#6B5344 0;
-    --g:conic-gradient(at 50% 25%,#0000 75%,var(--c));
-    background:
-      repeating-linear-gradient(#0000 0 48%,var(--c) 50%),var(--g),
-      conic-gradient(#0000 75%,var(--c)) calc(var(--s)/4) calc(var(--s)/2),
-      var(--g) calc(var(--s)/2) var(--s) #F8ECC9;
-    background-size: var(--s) var(--s),var(--s) calc(2*var(--s));
-    animation: g16 2s infinite linear;
+@keyframes g3-1 {
+  to {
+    background-position-x: -0.25px, calc(var(--s) - 1px), -0.5px,
+      calc(var(--s) - 0.5px);
   }
-  @keyframes g16 {
-    to {
-      background-position: 
-        0 0,
-        var(--s) 0,
-        calc(var(--s)/4) calc(var(--s)/2),
-        calc(var(--s)/-2) var(--s);
-    }
-  
+}
+@keyframes g3-2 {
+  to {
+    background-position-y: -0.25px, calc(var(--s) - 1px), 0.25px,
+      calc(var(--s) - 0.5px);
+  }
 }
 
-
-.moving-square{
-    --s: 100px;
-    --c1: #C3CCAF;
-    --c2: #67434F; 
-    --_s: calc(2*var(--s)) calc(2*var(--s));
-    --_g: var(--_s) conic-gradient(at 40% 40%,#0000 75%,var(--c1) 0);
-    --_p: var(--_s) conic-gradient(at 20% 20%,#0000 75%,var(--c2) 0);
-    background:
-      calc( .9*var(--s)) calc( .9*var(--s))/var(--_p),
-      calc(-.1*var(--s)) calc(-.1*var(--s))/var(--_p),
-      calc( .7*var(--s)) calc( .7*var(--s))/var(--_g),
-      calc(-.3*var(--s)) calc(-.3*var(--s))/var(--_g),
-      conic-gradient(from 90deg at 20% 20%,var(--c2) 25%,var(--c1) 0) 
-       0 0/var(--s) var(--s);
-    animation: g6 3s infinite;
+.illusion {
+  --s: 80px;
+  --c: #6b5344 0;
+  --g: conic-gradient(at 50% 25%, #0000 75%, var(--c));
+  background: repeating-linear-gradient(#0000 0 48%, var(--c) 50%), var(--g),
+    conic-gradient(#0000 75%, var(--c)) calc(var(--s) / 4) calc(var(--s) / 2),
+    var(--g) calc(var(--s) / 2) var(--s) #f8ecc9;
+  background-size: var(--s) var(--s), var(--s) calc(2 * var(--s));
+  animation: g16 2s infinite linear;
+}
+@keyframes g16 {
+  to {
+    background-position: 0 0, var(--s) 0, calc(var(--s) / 4) calc(var(--s) / 2),
+      calc(var(--s) / -2) var(--s);
   }
-  @keyframes g6 {
-    0% {
-     background-position: 
-      calc( .9*var(--s)) calc( .9*var(--s)),
-      calc(-.1*var(--s)) calc(-.1*var(--s)),
-      calc( .7*var(--s)) calc( .7*var(--s)),
-      calc(-.3*var(--s)) calc(-.3*var(--s)),0 0
-    }
-    25% {
-     background-position: 
-      calc(1.9*var(--s)) calc( .9*var(--s)),
-      calc(-1.1*var(--s)) calc(-.1*var(--s)),
-      calc(1.7*var(--s)) calc( .7*var(--s)),
-      calc(-1.3*var(--s)) calc(-.3*var(--s)),0 0
-    }
-    50% {
-     background-position: 
-      calc(1.9*var(--s)) calc(-.1*var(--s)),
-      calc(-1.1*var(--s)) calc( .9*var(--s)),
-      calc(1.7*var(--s)) calc(-.3*var(--s)),
-      calc(-1.3*var(--s)) calc( .7*var(--s)),0 0
-    }
-    75% {
-     background-position: 
-      calc(2.9*var(--s)) calc(-.1*var(--s)),
-      calc(-2.1*var(--s)) calc( .9*var(--s)),
-      calc(2.7*var(--s)) calc(-.3*var(--s)),
-      calc(-2.3*var(--s)) calc( .7*var(--s)),0 0
-    }
-    100% {
-     background-position: 
-      calc(2.9*var(--s)) calc(-1.1*var(--s)),
-      calc(-2.1*var(--s)) calc(1.9*var(--s)),
-      calc(2.7*var(--s)) calc(-1.3*var(--s)),
-      calc(-2.3*var(--s)) calc(1.7*var(--s)),0 0
-    }  
+}
+
+.moving-square {
+  --s: 100px;
+  --c1: #c3ccaf;
+  --c2: #67434f;
+  --_s: calc(2 * var(--s)) calc(2 * var(--s));
+  --_g: var(--_s) conic-gradient(at 40% 40%, #0000 75%, var(--c1) 0);
+  --_p: var(--_s) conic-gradient(at 20% 20%, #0000 75%, var(--c2) 0);
+  background: calc(0.9 * var(--s)) calc(0.9 * var(--s)) / var(--_p),
+    calc(-0.1 * var(--s)) calc(-0.1 * var(--s)) / var(--_p),
+    calc(0.7 * var(--s)) calc(0.7 * var(--s)) / var(--_g),
+    calc(-0.3 * var(--s)) calc(-0.3 * var(--s)) / var(--_g),
+    conic-gradient(from 90deg at 20% 20%, var(--c2) 25%, var(--c1) 0) 0 0 /
+      var(--s) var(--s);
+  animation: g6 3s infinite;
+}
+@keyframes g6 {
+  0% {
+    background-position: calc(0.9 * var(--s)) calc(0.9 * var(--s)),
+      calc(-0.1 * var(--s)) calc(-0.1 * var(--s)),
+      calc(0.7 * var(--s)) calc(0.7 * var(--s)),
+      calc(-0.3 * var(--s)) calc(-0.3 * var(--s)), 0 0;
+  }
+  25% {
+    background-position: calc(1.9 * var(--s)) calc(0.9 * var(--s)),
+      calc(-1.1 * var(--s)) calc(-0.1 * var(--s)),
+      calc(1.7 * var(--s)) calc(0.7 * var(--s)),
+      calc(-1.3 * var(--s)) calc(-0.3 * var(--s)), 0 0;
+  }
+  50% {
+    background-position: calc(1.9 * var(--s)) calc(-0.1 * var(--s)),
+      calc(-1.1 * var(--s)) calc(0.9 * var(--s)),
+      calc(1.7 * var(--s)) calc(-0.3 * var(--s)),
+      calc(-1.3 * var(--s)) calc(0.7 * var(--s)), 0 0;
+  }
+  75% {
+    background-position: calc(2.9 * var(--s)) calc(-0.1 * var(--s)),
+      calc(-2.1 * var(--s)) calc(0.9 * var(--s)),
+      calc(2.7 * var(--s)) calc(-0.3 * var(--s)),
+      calc(-2.3 * var(--s)) calc(0.7 * var(--s)), 0 0;
+  }
+  100% {
+    background-position: calc(2.9 * var(--s)) calc(-1.1 * var(--s)),
+      calc(-2.1 * var(--s)) calc(1.9 * var(--s)),
+      calc(2.7 * var(--s)) calc(-1.3 * var(--s)),
+      calc(-2.3 * var(--s)) calc(1.7 * var(--s)), 0 0;
+  }
 }
 
 .zig-zag {
   background-color: #e5e5f7;
   opacity: 0.8;
-  background: linear-gradient(135deg, #00000055 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #000000 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #000000 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
+  background: linear-gradient(135deg, #00000055 25%, transparent 25%) -10px 0/
+      20px 20px,
+    linear-gradient(225deg, #000000 25%, transparent 25%) -10px 0/ 20px 20px,
+    linear-gradient(315deg, #00000055 25%, transparent 25%) 0px 0/ 20px 20px,
+    linear-gradient(45deg, #000000 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
 }
 
 .grid-dots {
-  background: radial-gradient(circle, #ff5722 10%, transparent 10%) 0 0 / 30px 30px,
+  background: radial-gradient(circle, #ff5722 10%, transparent 10%) 0 0 / 30px
+      30px,
     radial-gradient(circle, #ff5722 10%, transparent 10%) 15px 15px / 30px 30px;
   background-color: #ffe0b2;
 }
 
 .diamond {
-  background: repeating-linear-gradient(45deg,
+  background: repeating-linear-gradient(
+      45deg,
       #ff4081,
       #ff4081 10px,
       transparent 10px,
-      transparent 20px),
-    repeating-linear-gradient(-45deg,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
       #ff4081,
       #ff4081 10px,
       transparent 10px,
-      transparent 20px);
+      transparent 20px
+    );
 }
 
 .wave {
-  background: radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.5), transparent 70%) repeat;
+  background: radial-gradient(
+      circle at 50% 120%,
+      rgba(255, 255, 255, 0.5),
+      transparent 70%
+    )
+    repeat;
   background-size: 60px 60px;
 }
 
 .zebra-stripes {
-  background: repeating-linear-gradient(-45deg,
-      #1e1d1f,
-      #292629 20px,
-      #bfbdc0 20px,
-      #ffffff 40px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #1e1d1f,
+    #292629 20px,
+    #bfbdc0 20px,
+    #ffffff 40px
+  );
 }
 
 .sunburst {
-  background: conic-gradient(#ffeb3b 15deg,
-      #ff9800 15deg 30deg,
-      #f44336 30deg 45deg,
-      #ffeb3b 45deg 60deg,
-      #ff9800 60deg 75deg,
-      #f44336 75deg 90deg);
+  background: conic-gradient(
+    #ffeb3b 15deg,
+    #ff9800 15deg 30deg,
+    #f44336 30deg 45deg,
+    #ffeb3b 45deg 60deg,
+    #ff9800 60deg 75deg,
+    #f44336 75deg 90deg
+  );
 }
 
 .honeycomb {
-    --s: 37px; 
-    --c1: #f37a16;
-    --c2: #ecbe13; 
-    --c:#0000,var(--c1) .5deg 119.5deg,#0000 120deg;
-    --g1:conic-gradient(from  60deg at 56.25% calc(425%/6),var(--c));
-    --g2:conic-gradient(from 180deg at 43.75% calc(425%/6),var(--c));
-    --g3:conic-gradient(from -60deg at 50%   calc(175%/12),var(--c));
-    background:
-      var(--g1),var(--g1) var(--s) calc(1.73*var(--s)),
-      var(--g2),var(--g2) var(--s) calc(1.73*var(--s)),
-      var(--g3) var(--s) 0,var(--g3) 0 calc(1.73*var(--s)) 
-      var(--c2);
-    background-size: calc(2*var(--s)) calc(3.46*var(--s));
+  --s: 37px;
+  --c1: #f37a16;
+  --c2: #ecbe13;
+  --c: #0000, var(--c1) 0.5deg 119.5deg, #0000 120deg;
+  --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+  --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+  --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+  background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+    var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+    var(--g3) 0 calc(1.73 * var(--s)) var(--c2);
+  background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 }
 
 .concentric-circles {
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 10%, transparent 10%, transparent 20%, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0.7) 30%, transparent 30%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent 10%,
+    transparent 20%,
+    rgba(0, 0, 0, 0.7) 20%,
+    rgba(0, 0, 0, 0.7) 30%,
+    transparent 30%
+  );
   background-size: 50px 50px;
   opacity: 0.7;
 }
 
-
 .colorslide {
-  background: linear-gradient(132deg, #000000, #00ff00, #0000ff, #e60073, #ff0000, #ffffff);
+  background: linear-gradient(
+    132deg,
+    #000000,
+    #00ff00,
+    #0000ff,
+    #e60073,
+    #ff0000,
+    #ffffff
+  );
   background-size: 400% 400%;
   animation: BackgroundGradient 15s ease infinite;
 }
 
 @keyframes BackgroundGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @keyframes sun-rays-animation {
   0% {
@@ -363,14 +446,14 @@
 }
 
 .shattered-glass {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 15%, transparent 15%) 0 0,
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 15%, transparent 15%) 0
+      0,
     linear-gradient(225deg, rgba(0, 0, 0, 0.7) 15%, transparent 15%) 0 0,
     linear-gradient(315deg, rgba(0, 0, 0, 0.7) 15%, transparent 15%) 0 0,
     linear-gradient(45deg, rgba(0, 0, 0, 0.7) 15%, transparent 15%) 0 0;
   background-size: 50px 50px;
   opacity: 0.7;
 }
-
 
 /* This is for sooner */
 
@@ -453,10 +536,10 @@
 /* Gradient Definition */
 .custom-shape-divider-bottom-1741448917 svg defs linearGradient {
   stop:first-child {
-    stop-color: #FB923C; /* Orange-400 */
+    stop-color: #fb923c; /* Orange-400 */
   }
   stop:last-child {
-    stop-color: #DC2626; /* Red-600 */
+    stop-color: #dc2626; /* Red-600 */
   }
 }
 
@@ -476,14 +559,12 @@
   pointer-events: none; /* Prevent them from blocking clicks */
 }
 
-
 .bubbles span {
   max-width: 30px; /* Prevent large bubbles */
   max-height: 30px;
 }
 
-
-.bubbles span{
+.bubbles span {
   --color: #00b7c2;
   background-color: var(--color);
   position: absolute;
@@ -491,8 +572,8 @@
   border-radius: 50%;
   width: var(--size);
   aspect-ratio: 1/1;
-  left:var(--position-x);
-  top:var(--position-y);
+  left: var(--position-x);
+  top: var(--position-y);
   opacity: var(--visibility);
   animation: swing var(--anime-duration) linear infinite;
   animation-delay: var(--anime-delay);
@@ -511,21 +592,21 @@
   }
 }
 
-.bubbles span:nth-child(7n+1){
+.bubbles span:nth-child(7n + 1) {
   --color: #6bff6b;
 }
-.bubbles span:nth-child(7n+2){
+.bubbles span:nth-child(7n + 2) {
   --color: #ff6b6b;
 }
-.bubbles span:nth-child(7n+3){
+.bubbles span:nth-child(7n + 3) {
   --color: #6b6bff;
 }
-.bubbles span:nth-child(7n+4){
+.bubbles span:nth-child(7n + 4) {
   --color: #ff6b6b;
-}   
-.bubbles span:nth-child(7n+5){
+}
+.bubbles span:nth-child(7n + 5) {
   --color: #6b6bff;
 }
-.bubbles span:nth-child(7n+6){
+.bubbles span:nth-child(7n + 6) {
   --color: #ff6b6b;
 }

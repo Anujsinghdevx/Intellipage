@@ -1,8 +1,12 @@
-'use client';
-import React from 'react';
-import { LiveblocksProvider as LiveblocksSDKProvider } from '@liveblocks/react/suspense';
+"use client";
+import React from "react";
+import { LiveblocksProvider as LiveblocksSDKProvider } from "@liveblocks/react/suspense";
 
-const CustomLiveblocksProvider = ({ children }: { children: React.ReactNode }) => {
+const CustomLiveblocksProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   if (!process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY) {
     throw new Error("Missing NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY");
   }

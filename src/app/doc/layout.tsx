@@ -1,15 +1,12 @@
-import CustomLiveblocksProvider from '@/components/LiveBlocksProvider'
-import React from 'react'
+import CustomLiveblocksProvider from "@/components/LiveBlocksProvider";
+import React from "react";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <CustomLiveblocksProvider>
-      <div className="h-full w-full">
-        {children}
-      </div>
+      <div className="h-full w-full">{children}</div>
     </CustomLiveblocksProvider>
+  );
+};
 
-  )
-}
-
-export default PageLayout
+export default PageLayout;

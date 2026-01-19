@@ -1,37 +1,40 @@
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs'
-import './globals.css'
-import { Metadata } from 'next'
-import Navbar from "@/components/navbar"
-import { Toaster } from '@/components/ui/sonner';
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/nextjs";
+import "./globals.css";
+import { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 
-export const metadata: Metadata = { 
-  title: "Intellipage", 
-  description: "Think. Write. Sync. ✨" 
+export const metadata: Metadata = {
+  title: "Intellipage",
+  description: "Think. Write. Sync. ✨",
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className=""> 
+        <body className="">
           <Navbar />
           <div className="flex min-h-screen">
-            <main className='flex-1 overflow-y-auto scrollbar-hide'>
-              <SignedIn>
-                {children}
-              </SignedIn>
+            <main className="flex-1 overflow-y-auto scrollbar-hide">
+              <SignedIn>{children}</SignedIn>
               <SignedOut>
                 <RedirectToSignIn />
               </SignedOut>
             </main>
           </div>
-          <Toaster position='top-center'/>
+          <Toaster position="top-center" />
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }

@@ -22,7 +22,9 @@ Avatar.displayName = AvatarPrimitive.Root.displayName;
 
 const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image> & { src?: string }
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image> & {
+    src?: string;
+  }
 >(({ className, src, ...props }, ref) => {
   const [imgSrc, setImgSrc] = React.useState<string | null>(null);
 
@@ -49,7 +51,8 @@ const AvatarFallback = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(({ className, ...props }, ref) => {
   const { user } = useUser();
-  const initials = (user?.firstName?.charAt(0) || "") + (user?.lastName?.charAt(0) || "");
+  const initials =
+    (user?.firstName?.charAt(0) || "") + (user?.lastName?.charAt(0) || "");
 
   return (
     <AvatarPrimitive.Fallback
