@@ -1,7 +1,8 @@
 "use client";
+
+import React, { useState, useTransition } from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -9,30 +10,37 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { startTransition, useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { deleteDocument } from "@/actions/actions";
 import { toast } from "sonner";
+import { Trash2 } from "lucide-react";
 
 const DeleteDocument = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPending] = useTransition();
+  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
+
   const handleDelete = async () => {
     const roomId = pathname.split("/").pop();
     if (!roomId) return;
 
     startTransition(async () => {
-      const { success } = await deleteDocument(roomId);
+      try {
+        const result = await deleteDocument(roomId);
 
-      if (success) {
-        setIsOpen(false);
-        router.replace("/doc");
-        toast.success("Document deleted successfully");
-      } else {
-        toast.error("Error deleting document");
+        if (result.success) {
+          toast.success("Document deleted successfully");
+          setIsOpen(false);
+          // Redirect to home page after successful deletion
+          router.push("/");
+        } else {
+          toast.error(result.error || "Failed to delete document");
+        }
+      } catch (error) {
+        console.error("Error deleting document:", error);
+        toast.error("Failed to delete document");
       }
     });
   };
@@ -40,30 +48,36 @@ const DeleteDocument = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <Button asChild variant="destructive">
-        <DialogTrigger>Delete</DialogTrigger>
+        <DialogTrigger className="flex items-center gap-2">
+          <Trash2 className="w-4 h-4" />
+          Delete
+        </DialogTrigger>
       </Button>
+
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you sure you want to delete ?</DialogTitle>
+          <DialogTitle>Are you sure?</DialogTitle>
           <DialogDescription>
-            This will delete the document and all its contents,removing all
-            users from the document.
+            This will permanently delete this document and remove all users from
+            it. This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="sm:justify-end gap-2 ">
+
+        <DialogFooter className="gap-2 sm:gap-0">
           <Button
-            type="button"
+            variant="outline"
+            onClick={() => setIsOpen(false)}
+            disabled={isPending}
+          >
+            Cancel
+          </Button>
+          <Button
             variant="destructive"
             onClick={handleDelete}
             disabled={isPending}
           >
-            {isPending ? "Deleting…" : "Delete"}
+            {isPending ? "Deleting..." : "Delete Document"}
           </Button>
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
