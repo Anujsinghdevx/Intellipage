@@ -1,9 +1,4 @@
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  RedirectToSignIn,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import "./globals.css";
 import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
@@ -27,9 +22,7 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <main className="flex-1 overflow-y-auto scrollbar-hide">
               <SignedIn>{children}</SignedIn>
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
+              <SignedOut>{children}</SignedOut>
             </main>
           </div>
           <Toaster position="top-center" />
