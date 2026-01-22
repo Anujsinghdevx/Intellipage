@@ -29,10 +29,8 @@ const Sidebar = () => {
     editor: RoomDocument[];
   }>({ owner: [], editor: [] });
 
-  // Get user's email
   const userEmail = user?.emailAddresses?.[0]?.emailAddress;
 
-  // Query the user's rooms collection directly
   const [data, loading, error] = useCollection(
     userEmail ? collection(db, "users", userEmail, "rooms") : null
   );

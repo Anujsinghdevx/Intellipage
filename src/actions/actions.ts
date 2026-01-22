@@ -8,7 +8,7 @@ import { Timestamp } from "firebase-admin/firestore";
 export async function createNewDocument() {
   const { userId, sessionClaims } = await auth();
 
-  console.log("🔍 Auth Debug:", { userId, sessionClaims });
+  console.log(" Auth Debug:", { userId, sessionClaims });
 
   if (!userId) {
     throw new Error("Unauthorized: User not authenticated");
@@ -218,7 +218,7 @@ export async function migrateDocumentCollaborators(roomId: string) {
     throw new Error("Unauthorized");
   }
 
-  console.log("🔄 Migrating document collaborators for:", roomId);
+  console.log("Migrating document collaborators for:", roomId);
 
   try {
     const docRef = adminDb.collection("documents").doc(roomId);

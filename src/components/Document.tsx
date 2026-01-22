@@ -247,7 +247,6 @@ const Document = ({ id }: { id: string }) => {
         <div className="flex w-full max-w-screen-xl mx-auto justify-between items-center mb-5">
           <ManageUsers />
 
-          {/* Pattern Selection Dropdown */}
           <div className="flex justify-center">
             <div className="bg-white rounded-2xl shadow-2xl p-2 flex items-center space-x-3 ">
               <label className="text-sm font-semibold text-gray-700">

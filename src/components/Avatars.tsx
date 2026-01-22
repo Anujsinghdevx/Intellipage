@@ -10,9 +10,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const Avatars = () => {
-  const others = useOthers(); // Get other users editing the doc
-  const self = useSelf(); // Get current user
-  const all = [self, ...others]; // Combine self + others
+  const others = useOthers();
+  const self = useSelf();
+  const all = [self, ...others];
 
   return (
     <div className="flex gap-2 items-center">

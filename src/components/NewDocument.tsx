@@ -3,7 +3,7 @@ import React, { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { createNewDocument } from "@/actions/actions";
-import { FilePlus } from "lucide-react"; // Icon for better clarity
+import { FilePlus } from "lucide-react";
 
 const NewDocument = () => {
   const [isPending, startTransition] = useTransition();

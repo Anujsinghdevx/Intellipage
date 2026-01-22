@@ -75,8 +75,8 @@ const Sidebar = () => {
     for (let i = 0; i < maxBubbles; i++) {
       const bubble = document.createElement("span");
 
-      const size = 4 + 6 * Math.random(); // Reduce max size further
-      if (size > 30) continue; // Prevent large bubbles
+      const size = 4 + 6 * Math.random();
+      if (size > 30) continue;
 
       const positionX = 100 * Math.random();
       const positionY = 100 * Math.random();
@@ -110,7 +110,6 @@ const Sidebar = () => {
             IntelliPage gives you the flexibility of Notion—plus more.
           </p>
 
-          {/* Feature List */}
           <div className="space-y-4 text-gray-700">
             {[
               {
@@ -141,10 +140,8 @@ const Sidebar = () => {
             ))}
           </div>
 
-          {/* If User is Logged In */}
           {user ? (
             <>
-              {/* Primary Action Button */}
               <div className="flex flex-col items-center space-y-3">
                 <p className="text-gray-700 text-m">
                   Get started by creating a new document.
@@ -152,7 +149,6 @@ const Sidebar = () => {
                 <NewDocument />
               </div>
 
-              {/* Secondary Action Button */}
               <div className="flex flex-col items-center space-y-3">
                 <p className="text-gray-700 text-sm">
                   Or go to your created docs
@@ -165,7 +161,6 @@ const Sidebar = () => {
               </div>
             </>
           ) : (
-            /* If User is NOT Logged In */
             <div className="text-center space-y-3">
               <p className="text-gray-700 text-m font-semibold">
                 Login to create new documents or edit existing ones.
@@ -180,7 +175,6 @@ const Sidebar = () => {
           )}
         </div>
 
-        {/* Bottom Divider */}
         <div className="custom-shape-divider-bottom-1741448917 relative z-10">
           <svg
             data-name="Layer 1"
@@ -211,7 +205,7 @@ const Sidebar = () => {
         className='className=" text-white p-6 flex justify-center  bg-gradient-to-r from-red-600 to-orange-400 font-medium rounded-lg shadow-md 
             hover:bg-gray-100 transition-all cursor-pointer h-20'
       >
-        All rights are reserved © 2025
+        All rights are reserved © 2026 IntelliPage
       </div>
     </div>
   );

@@ -38,7 +38,8 @@ interface TextBlock {
 
 const extractTextFromBlocks = (data: unknown): string => {
   if (typeof data === "string") {
-    return data;
+    const withoutTags = data.replace(/<[^>]+>/g, " ");
+    return withoutTags.replace(/\s+/g, " ").trim();
   }
 
   if (!data || typeof data !== "object") {
@@ -108,26 +109,12 @@ const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
     startTransition(async () => {
       try {
         const rawData = doc.get("document-store").toJSON();
-        console.log("=== DEBUG: Raw document data ===");
-        console.log(rawData);
-        console.log("Type:", typeof rawData);
-        console.log("Is Array:", Array.isArray(rawData));
-
         const documentData = extractTextFromBlocks(rawData);
-
-        console.log("=== DEBUG: Extracted text ===");
-        console.log(documentData);
-        console.log("Length:", documentData.length);
 
         if (!documentData || documentData.trim().length === 0) {
           toast.error("Document is empty or could not extract text");
-          console.error("Failed to extract text from:", rawData);
           return;
         }
-
-        console.log("=== DEBUG: Sending to API ===");
-        console.log("Text:", documentData);
-        console.log("Language:", language);
 
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/translateDocument`,
@@ -144,8 +131,6 @@ const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
         );
 
         const responseData = await res.json();
-        console.log("=== DEBUG: API Response ===");
-        console.log(responseData);
 
         if (res.ok) {
           const { translated_text } = responseData;
@@ -158,12 +143,11 @@ const TranslateDocument = ({ doc }: { doc: Y.Doc }) => {
 
           toast.success("Document translated successfully");
         } else {
-          console.error("API Error:", responseData);
+          console.error("Translation API error:", responseData);
           toast.error("Failed to translate the document");
         }
       } catch (error) {
-        console.error("=== DEBUG: Translation error ===");
-        console.error(error);
+        console.error("Translation error:", error);
         toast.error("An error occurred during translation");
       }
     });

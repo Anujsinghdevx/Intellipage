@@ -33,7 +33,6 @@ const DeleteDocument = () => {
         if (result.success) {
           toast.success("Document deleted successfully");
           setIsOpen(false);
-          // Redirect to home page after successful deletion
           router.push("/");
         } else {
           toast.error(result.error || "Failed to delete document");

@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const SidebarOption = ({ href, id }: { href: string; id: string }) => {
   const [data, loading, error] = useDocumentData(doc(db, "documents", id));
   const pathname = usePathname();
-  const isActive = pathname === href; // Ensuring exact match
+  const isActive = pathname === href;
 
   if (loading) return <p className="text-gray-500 text-sm">Loading...</p>;
   if (error)

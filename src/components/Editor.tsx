@@ -73,15 +73,11 @@ const Editor = () => {
   return (
     <div>
       <div className="flex items-center justify-end gap-2 mb-10">
-        {/* TranslateDocumentAI */}
         <TranslateDocument doc={doc} />
-        {/* {chatdocumentai} */}
         <Button className={style} onClick={() => setDarkmode(!darkmode)}>
           {darkmode ? <SunIcon /> : <MoonIcon />}
         </Button>
       </div>
-
-      {/* Blocknotes */}
       <BlockNote doc={doc} provider={provider} darkmode={darkmode} />
     </div>
   );
