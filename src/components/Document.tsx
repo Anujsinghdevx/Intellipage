@@ -23,17 +23,12 @@ import {
 import NewDocument from "./NewDocument";
 import { MenuIcon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
-import { collection, DocumentData } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import SidebarOption from "./SidebarOption";
 import { updateDocument } from "@/actions/actions";
 import { toast } from "sonner";
-
-interface RoomDocument extends DocumentData {
-  createdAt: string;
-  role: "owner" | "editor";
-  roomId: string;
-  userId: string;
-}
+import { logger } from "@/lib/logger";
+import { RoomDocument } from "@/types/types";
 
 const patterns = [
   "checkers",
@@ -87,6 +82,12 @@ const Document = ({ id }: { id: string }) => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (error) {
+      logger.error("Failed to load document", { documentId: id, error });
+    }
+  }, [error, id]);
+
   const updateTitle = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -101,9 +102,14 @@ const Document = ({ id }: { id: string }) => {
         } else {
           toast.error("Failed to rename document");
           setInput(data?.title || "");
+          logger.error("Document rename failed", {
+            documentId: id,
+            input,
+            reason: result.error,
+          });
         }
       } catch (error) {
-        console.error("Error updating document:", error);
+        logger.error("Error updating document", { documentId: id, error });
         toast.error("Failed to rename document");
         setInput(data?.title || "");
       }
@@ -167,7 +173,11 @@ const Document = ({ id }: { id: string }) => {
               My Documents
             </h2>
             {groupedData.owner.map((doc) => (
-              <SidebarOption key={doc.id} href={`/doc/${doc.id}`} id={doc.id} />
+              <SidebarOption
+                key={doc.id}
+                href={`/doc/${doc.id}`}
+                id={doc.id as string}
+              />
             ))}
           </>
         )}
@@ -178,7 +188,11 @@ const Document = ({ id }: { id: string }) => {
             Shared with me
           </h2>
           {groupedData.editor.map((doc) => (
-            <SidebarOption key={doc.id} href={`/doc/${doc.id}`} id={doc.id} />
+            <SidebarOption
+              key={doc.id}
+              href={`/doc/${doc.id}`}
+              id={doc.id as string}
+            />
           ))}
         </div>
       )}

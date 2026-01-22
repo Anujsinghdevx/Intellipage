@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import liveblocks from "@/lib/liveblocks";
+import { logger } from "@/lib/logger";
+import { handleApiError } from "@/lib/error-handler";
 
 export async function POST(req: NextRequest) {
   try {
     const { userId, sessionClaims } = await auth();
 
-    console.log("DEBUG: userId =", userId, "| type =", typeof userId);
-    console.log("DEBUG: sessionClaims =", sessionClaims);
+    logger.info("Auth request received", { userId, sessionClaims });
 
     if (!userId || typeof userId !== "string" || userId.trim() === "") {
       return NextResponse.json(
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { room } = body;
-    console.log("DEBUG: room =", room);
+    logger.info("Auth request room", { room });
 
     if (!room || typeof room !== "string") {
       return NextResponse.json({ error: "Invalid room" }, { status: 400 });
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
     let avatar = sessionClaims?.imageUrl as string;
 
     if (!email || !name || !avatar) {
-      console.log("Fetching user info from currentUser API...");
+      logger.info("Fetching user info from currentUser API...");
       const user = await currentUser();
 
       if (!email) {
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    console.log("User info:", { email, name, avatar });
+    logger.info("User info resolved", { email, name, avatar });
 
     const session = liveblocks.prepareSession(userId, {
       userInfo: {
@@ -62,9 +63,10 @@ export async function POST(req: NextRequest) {
 
     return new Response(responseBody, { status });
   } catch (error) {
-    console.error("Auth endpoint error:", error);
+    logger.error("Auth endpoint error", { error });
+    const handledError = handleApiError(error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: handledError.message || "Internal server error" },
       { status: 500 }
     );
   }

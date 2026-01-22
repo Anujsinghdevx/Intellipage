@@ -4,6 +4,8 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { adminDb } from "../../firebase-admin";
 import liveblocks from "@/lib/liveblocks";
 import { Timestamp } from "firebase-admin/firestore";
+import { handleApiError } from "@/lib/error-handler";
+import { logger } from "@/lib/logger";
 
 export async function createNewDocument() {
   const { userId, sessionClaims } = await auth();
@@ -62,23 +64,11 @@ export async function createNewDocument() {
 
     return { docId: docRef.id };
   } catch (error: unknown) {
-    console.error("❌ Error creating document:");
-    console.error("Error type:", typeof error);
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : typeof error === "string"
-        ? error
-        : "Unknown error";
+    logger.error("Error creating document", { error, userId });
+    const handledError = handleApiError(error);
+    console.error("❌ Error creating document:", handledError.message);
 
-    const errorCode =
-      error instanceof Error && "code" in error ? error.code : undefined;
-
-    console.error("Error message:", errorMessage);
-    console.error("Error code:", errorCode);
-    console.error("Full error object:", JSON.stringify(error, null, 2));
-
-    throw new Error(`Failed to create document: ${errorMessage}`);
+    throw new Error(`Failed to create document: ${handledError.message}`);
   }
 }
 
@@ -159,8 +149,9 @@ export async function inviteUserToDocument(roomId: string, email: string) {
     console.log("✅ User invited successfully");
     return { success: true };
   } catch (error) {
-    console.error("❌ Error adding user:", error);
-    return { success: false };
+    logger.error("Error adding user to document", { error, roomId, email });
+    const handledError = handleApiError(error);
+    return { success: false, error: handledError.message };
   }
 }
 
@@ -184,8 +175,9 @@ export async function removeUserFromDocument(roomId: string, email: string) {
     console.log("✅ User removed successfully");
     return { success: true };
   } catch (error) {
-    console.error("❌ Error removing user:", error);
-    return { success: false };
+    logger.error("Error removing user from document", { error, roomId, email });
+    const handledError = handleApiError(error);
+    return { success: false, error: handledError.message };
   }
 }
 
@@ -206,8 +198,9 @@ export async function updateDocument(roomId: string, title: string) {
     console.log("✅ Document updated successfully");
     return { success: true };
   } catch (error) {
-    console.error("❌ Error updating document:", error);
-    return { success: false };
+    logger.error("Error updating document", { error, roomId, title });
+    const handledError = handleApiError(error);
+    return { success: false, error: handledError.message };
   }
 }
 
@@ -273,7 +266,8 @@ export async function migrateDocumentCollaborators(roomId: string) {
       collaboratorCount: Object.keys(collaborators).length,
     };
   } catch (error: unknown) {
-    console.error("❌ Error migrating document:", error);
-    return { success: false, error: (error as Error)?.message };
+    logger.error("Error migrating document collaborators", { error, roomId });
+    const handledError = handleApiError(error);
+    return { success: false, error: handledError.message };
   }
 }

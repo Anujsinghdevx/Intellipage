@@ -11,16 +11,10 @@ import {
 import NewDocument from "./NewDocument";
 import { MenuIcon } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
-import { collection, DocumentData } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import SidebarOption from "./SidebarOption";
-
-interface RoomDocument extends DocumentData {
-  createdAt: string;
-  role: "owner" | "editor";
-  roomId: string;
-  userId: string;
-}
+import { RoomDocument } from "@/types/types";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -85,9 +79,16 @@ const Sidebar = () => {
             <h2 className="text-gray-600 font-semibold text-lg border-b pb-2">
               My Documents
             </h2>
-            {groupedData.owner.map((doc) => (
-              <SidebarOption key={doc.id} href={`/doc/${doc.id}`} id={doc.id} />
-            ))}
+            {groupedData.owner.map(
+              (doc) =>
+                doc.id && (
+                  <SidebarOption
+                    key={doc.id}
+                    href={`/doc/${doc.id}`}
+                    id={doc.id}
+                  />
+                )
+            )}
           </>
         )}
       </div>
@@ -96,9 +97,16 @@ const Sidebar = () => {
           <h2 className="text-gray-600 font-semibold text-lg border-b pb-2">
             Shared with me
           </h2>
-          {groupedData.editor.map((doc) => (
-            <SidebarOption key={doc.id} href={`/doc/${doc.id}`} id={doc.id} />
-          ))}
+          {groupedData.editor.map(
+            (doc) =>
+              doc.id && (
+                <SidebarOption
+                  key={doc.id}
+                  href={`/doc/${doc.id}`}
+                  id={doc.id}
+                />
+              )
+          )}
         </div>
       )}
     </>

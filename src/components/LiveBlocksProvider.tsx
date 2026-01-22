@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { LiveblocksProvider as LiveblocksSDKProvider } from "@liveblocks/react/suspense";
+import { logger } from "@/lib/logger";
 
 const CustomLiveblocksProvider = ({
   children,
@@ -8,6 +9,7 @@ const CustomLiveblocksProvider = ({
   children: React.ReactNode;
 }) => {
   if (!process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY) {
+    logger.error("Missing NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY");
     throw new Error("Missing NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY");
   }
 

@@ -12,6 +12,7 @@ import { BlockNoteEditor } from "@blocknote/core";
 import { useCreateBlockNote } from "@blocknote/react";
 import stringToColor from "@/lib/stringToColor";
 import TranslateDocument from "./TranslateDocument";
+import { logger } from "@/lib/logger";
 
 type EditorProps = {
   doc: Y.Doc;
@@ -56,15 +57,20 @@ const Editor = () => {
       : "text-gray-800 bg-gray-300 hover:bg-gray-300 hover:text-gray-700"
   }`;
   useEffect(() => {
-    const yDoc = new Y.Doc();
-    const yProvider = new LiveblocksYjsProvider(room, yDoc);
-    setDoc(yDoc);
-    setProvider(yProvider);
+    try {
+      const yDoc = new Y.Doc();
+      const yProvider = new LiveblocksYjsProvider(room, yDoc);
+      setDoc(yDoc);
+      setProvider(yProvider);
 
-    return () => {
-      yDoc?.destroy();
-      yProvider?.destroy();
-    };
+      return () => {
+        yDoc?.destroy();
+        yProvider?.destroy();
+      };
+    } catch (error) {
+      logger.error("Editor initialization failed", { error });
+      return () => {};
+    }
   }, [room]);
   if (!doc || !provider) {
     return null;

@@ -1,7 +1,7 @@
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import "./globals.css";
 import { Metadata } from "next";
-import Navbar from "@/components/Navbar";
+import { Navbar } from "@/components";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {

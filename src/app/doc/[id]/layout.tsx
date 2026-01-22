@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
-import RoomProvider from "@/components/RoomProvider";
+import { RoomProvider } from "@/components";
 
 const DocLayout = async ({
   children,

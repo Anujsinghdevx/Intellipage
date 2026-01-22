@@ -43,3 +43,38 @@ next-env.d.ts
 # clerk configuration (can include secrets)
 /.clerk/
 service_key.json
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+.turbo/
+.next/
+
+# Testing
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Miscellaneous
+.cache/
+tmp/
+temp/
+*.bak

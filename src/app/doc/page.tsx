@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useUser } from "@clerk/nextjs";
-import { collection, DocumentData } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import {
   Sheet,
@@ -12,16 +12,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import NewDocument from "@/components/NewDocument";
-import SidebarOption from "@/components/SidebarOption";
+import { NewDocument, SidebarOption } from "@/components";
 import { MenuIcon } from "lucide-react";
-
-interface RoomDocument extends DocumentData {
-  createdAt: string;
-  role: "owner" | "editor";
-  roomId: string;
-  userId: string;
-}
+import { RoomDocument } from "@/types/types";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -78,7 +71,7 @@ const Sidebar = () => {
                   <SidebarOption
                     key={doc.id}
                     href={`/doc/${doc.id}`}
-                    id={doc.id}
+                    id={doc.id as string}
                   />
                 ))}
               </div>
@@ -98,7 +91,7 @@ const Sidebar = () => {
                   <SidebarOption
                     key={doc.id}
                     href={`/doc/${doc.id}`}
-                    id={doc.id}
+                    id={doc.id as string}
                   />
                 ))}
               </div>
